@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Dice Roller 🎲</h2>
+        <form method="POST">
+            <label for="num_dice">Number of Dice:</label>
+            <input type="number" id="num_dice" name="num_dice" min="1" required>
+
+            <label for="num_faces">Number of Faces on Each Die:</label>
+            <input type="number" id="num_faces" name="num_faces" min="2" required>
+
+            <button type="submit">Roll Dice</button>
+        </form>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $num_dice = intval($_POST["num_dice"]);
+            $num_faces = intval($_POST["num_faces"]);
+            
+            echo "<h3>Results:</h3>";
+            echo "<div class='dice-results'>";
+            
+            for ($i = 0; $i < $num_dice; $i++) {
+                $roll = rand(1, $num_faces);
+                echo "<div class='die'>🎲 $roll</div>";
+            }
+            
+            echo "</div>";
+        }
+        ?>
+    </div>
+
+</body>
+</html>
